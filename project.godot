@@ -19,6 +19,11 @@ config/name="WildJam21"
 run/main_scene="res://Level.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1500
+window/size/height=1024
+
 [input]
 
 move_right={
