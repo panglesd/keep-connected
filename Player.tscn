@@ -4,9 +4,9 @@
 [ext_resource path="res://Assets/Sprites/robot1_idle.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20, 25 )
+extents = Vector2( 20, 21 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "idle"
 length = 0.6
 loop = true
@@ -33,10 +33,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -10, -24 ), Vector2( -10, -21 ), Vector2( -10, -18 ), Vector2( -10, -21 ) ]
+"values": [ Vector2( -9.33333, -17 ), Vector2( -9.33333, -17 ), Vector2( -9, -14 ), Vector2( -9.33333, -16.3333 ) ]
 }
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -49,7 +49,7 @@ angle_random = 1.0
 hue_variation = 1.0
 hue_variation_random = 1.0
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture" id=4]
 width = 10
 
 [node name="Player" type="KinematicBody2D"]
@@ -60,29 +60,33 @@ position = Vector2( -1, 3 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -24, -28 )
-scale = Vector2( 3, 3 )
+position = Vector2( -21, -23 )
+scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( 0.175, 0 )
 hframes = 4
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-anims/idle = SubResource( 3 )
+anims/idle = SubResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="Sprite"]
 position = Vector2( 4.66667, 2.66667 )
 emitting = false
 amount = 20
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 3 )
 
 [node name="Antenna" type="Sprite" parent="."]
 visible = false
 position = Vector2( -8, -64 )
 scale = Vector2( 0.115705, 16 )
-texture = SubResource( 2 )
+texture = SubResource( 4 )
 
 [node name="PositionAntenna" type="Position2D" parent="."]
-position = Vector2( -10, -21 )
+position = Vector2( -9.33333, -17 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true

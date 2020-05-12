@@ -105,6 +105,8 @@ func _physics_process(delta):
 
 	if connected:
 		handle_input(input)
+	if not connected and not playing:
+		handle_input(null_input)
 
 ################################
 func save_input_in(saved_input, time_since_recording):
@@ -242,10 +244,10 @@ func compute_state():
 func set_record_time(rt):
 	time_since_recording = rt
 	emit_signal("record_time_changed", time_since_recording)
-	get_parent().get_node("UI/RecordTime").text=str(time_since_recording)
+#	get_parent().get_node("UI/RecordTime").text=str(time_since_recording)
 	
 func set_play_time(pt):
 	time_since_playing = pt
 	emit_signal("play_time_changed", time_since_playing)
-	get_parent().get_node("UI/RecordTime").text=str(time_since_playing)
+#	get_parent().get_node("UI/RecordTime").text=str(time_since_playing)
 	
