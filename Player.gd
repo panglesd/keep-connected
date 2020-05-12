@@ -28,6 +28,19 @@ var time_since_playing = 0.0
 var saved_input = []
 var count_emitter = 0
 
+var last_input ={
+	"dummy": false,
+		"is_action_just_pressed(move_left)": false,
+		"is_action_just_pressed(move_right)": false,
+		"is_action_just_pressed(jump)": false,
+		"is_action_just_released(move_left)": false,
+		"is_action_just_released(move_right)": false,
+		"is_action_just_released(jump)": false,
+	"is_action_pressed(move_right)": false,
+	"is_action_pressed(move_left)": false,
+	"is_action_pressed(jump)": false
+}
+
 var null_input = {
 	"dummy": false,
 		"is_action_just_pressed(move_left)": false,
@@ -41,17 +54,17 @@ var null_input = {
 	"is_action_pressed(jump)": false
 }
 
-var state = {
-	"is_action_pressed(move_right)": false,
-	"is_action_pressed(move_left)": false,
-	"is_action_pressed(jump)": false
-}
-var last_state = null
-var null_state = {
-	"is_action_pressed(move_right)": false,
-	"is_action_pressed(move_left)": false,
-	"is_action_pressed(jump)": false
-}
+#var state = {
+#	"is_action_pressed(move_right)": false,
+#	"is_action_pressed(move_left)": false,
+#	"is_action_pressed(jump)": false
+#}
+#var last_state = null
+#var null_state = {
+#	"is_action_pressed(move_right)": false,
+#	"is_action_pressed(move_left)": false,
+#	"is_action_pressed(jump)": false
+#}
 
 func _draw():
 	pass
@@ -82,18 +95,6 @@ func _physics_process(delta):
 		"is_action_just_released(move_right)": Input.is_action_just_released("move_right"),
 		"is_action_just_released(jump)": Input.is_action_just_released("jump"),
 	};
-	if Input.is_action_just_pressed("delete_record"):
-		discard_recording()
-	if Input.is_action_just_pressed("record"):
-		if recording:
-			stop_recording()
-		else:
-			start_recording()
-	if recording:
-		set_record_time(min(time_since_recording + delta, capacity))
-		if(time_since_recording == capacity):
-			stop_recording()
-		save_input_in(saved_input, time_since_recording)
 	if playing:
 #		print("play")
 #		time_since_playing += delta
@@ -102,21 +103,36 @@ func _physics_process(delta):
 			stop_playing()
 		if len(saved_input)>0:
 			if saved_input[0][1] < time_since_playing:
-				handle_input(saved_input.pop_front()[0])
-				return
-			else:
-				handle_input(null_input)
+				last_input = saved_input.pop_front()[0]
+			handle_input(last_input)
+			return
+#			else:
+#				handle_input(null_input)
 
 		else:
+			print("nothing more to do")
 			handle_input(null_input)
 
 	if connected:
 		handle_input(input)
+		if Input.is_action_just_pressed("delete_record"):
+			discard_recording()
+		if Input.is_action_just_pressed("record"):
+			if recording:
+				stop_recording()
+			else:
+				start_recording()
+		if recording:
+			set_record_time(min(time_since_recording + delta, capacity))
+			if(time_since_recording == capacity):
+				stop_recording()
+			save_input_in(saved_input, time_since_recording)
+
 	if not connected and not playing:
 		handle_input(null_input)
 
 ################################
-func save_input_in(saved_input, time_since_recording):
+func save_input_in(saved_input, time_since_recording, forced=false):
 	var input = {
 		"dummy": false,
 		"is_action_pressed(move_left)": Input.is_action_pressed("move_left"),
@@ -132,7 +148,7 @@ func save_input_in(saved_input, time_since_recording):
 	if len(saved_input) == 0:
 		saved_input.push_back([input, time_since_recording])
 		return
-	if equal_input(input,saved_input[0][0]):
+	if equal_input(input,saved_input[-1][0]) and not forced:
 		return
 	saved_input.push_back([input, time_since_recording])
 	return
@@ -140,23 +156,11 @@ func save_input_in(saved_input, time_since_recording):
 func equal_input(input1, input2):
 	for key in input1.keys():
 		if input1[key] != input2[key]:
+#			print(key, "is false", input1[key], input2[key])
 			return false
 	return true
 
 func handle_input(input):
-#	print("yo", start_record_state)
-	if(input["is_action_just_pressed(move_left)"]):
-		state["is_action_pressed(move_left)"] = true
-	if(input["is_action_just_pressed(move_right)"]):
-		state["is_action_pressed(move_right)"] = true
-	if(input["is_action_just_pressed(jump)"]):
-		state["is_action_pressed(jump)"] = true
-	if(input["is_action_just_released(move_left)"]):
-		state["is_action_pressed(move_left)"] = false
-	if(input["is_action_just_released(move_right)"]):
-		state["is_action_pressed(move_right)"] = false
-	if(input["is_action_just_released(jump)"]):
-		state["is_action_pressed(jump)"] = false
 	
 	var move_vec = Vector2()
 	if !dead:
@@ -164,7 +168,7 @@ func handle_input(input):
 #			print("moveing left")
 			move_vec.x -= 1
 		if input["is_action_pressed(move_right)"]:
-#			print("moveing right")
+			print("moveing right", randi())
 			move_vec.x += 1
 	
 	velo += move_vec * move_speed - drag * Vector2(velo.x, 0)
@@ -231,6 +235,7 @@ func lost_by_emitter():
 	
 func start_playing():
 	playing = true
+	stop_recording()
 #	state = start_record_state
 #	time_since_playing = 0
 
@@ -245,7 +250,9 @@ func start_recording():
 	
 func stop_recording():
 	recording = false
-	print(saved_input)
+	save_input_in(saved_input, time_since_recording, true)
+#	print(len(saved_input))
+#	print(saved_input)
 
 func discard_recording():
 	stop_recording()
@@ -253,14 +260,14 @@ func discard_recording():
 	set_play_time(0)
 	saved_input = []
 
-func compute_state():
-	state = {
-		"is_action_pressed(move_right)": Input.is_action_pressed("move_right"),
-		"is_action_pressed(move_left)": Input.is_action_pressed("move_left"),
-		"is_action_pressed(jump)": Input.is_action_pressed("jump")
-	}
-	return state
-
+#func compute_state():
+#	state = {
+#		"is_action_pressed(move_right)": Input.is_action_pressed("move_right"),
+#		"is_action_pressed(move_left)": Input.is_action_pressed("move_left"),
+#		"is_action_pressed(jump)": Input.is_action_pressed("jump")
+#	}
+#	return state
+#
 
 func set_record_time(rt):
 	time_since_recording = rt

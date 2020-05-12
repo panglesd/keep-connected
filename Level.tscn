@@ -466,7 +466,7 @@ font_data = ExtResource( 2 )
 [node name="Player" parent="." groups=[
 "player",
 ] instance=ExtResource( 1 )]
-position = Vector2( -1056, 67.5 )
+position = Vector2( 672, 640 )
 
 [node name="Emitter" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 96 )
