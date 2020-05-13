@@ -80,6 +80,7 @@ func _draw():
 
 func _ready():
 	$PlayerSprite/AnimationPlayer.play("idle")
+	$NiceToMeetYou.play()
 	pass
 #	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
