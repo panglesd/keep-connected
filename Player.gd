@@ -16,6 +16,8 @@ var drag = 0.5
 
 var token_checkpoint = false
 
+var saidByeBye = false
+
 const jump_buffer = 0.08
 var time_pressed_jump = 0.0
 var time_left_ground = 0.0
@@ -110,6 +112,8 @@ func _physics_process(delta):
 #		time_since_playing += delta
 		set_play_time(min(time_since_playing + delta, time_since_recording))
 		if time_since_playing == time_since_recording:
+			if not token_checkpoint:
+				$EndOfInstructions.play()
 			stop_playing()
 		if len(saved_input)>0:
 			if saved_input[0][1] < time_since_playing:
@@ -135,6 +139,7 @@ func _physics_process(delta):
 		if recording:
 			set_record_time(min(time_since_recording + delta, capacity))
 			if(time_since_recording == capacity):
+				$DiskFull.play()
 				stop_recording()
 			save_input_in(saved_input, time_since_recording)
 
@@ -223,6 +228,7 @@ func handle_input(input):
 func jump():
 	if dead:
 		return
+	$jumpSound.play()
 	velo.y = -jump_force
 
 func get_cur_time():
@@ -234,11 +240,17 @@ func found_by_emitter():
 	if playing:
 		stop_playing()
 	if not connected:
+		if not token_checkpoint:
+			if(saidByeBye and not $OnMyOwn.playing):
+				
+				$GoodToSeeYou.play()
 		connected = true
 	
 func lost_by_emitter():
 	count_emitter -= 1
 	if(count_emitter == 0):
+		if not token_checkpoint:
+			say_OnMyOwn()
 		connected = false
 		$PlayerSprite/Particles2D.emitting=true
 		start_playing()
@@ -254,6 +266,7 @@ func stop_playing():
 #	state = compute_state()
 
 func start_recording():
+	$RecordSound.play()
 	recording = true
 #	start_record_state = state.duplicate()
 	pass
@@ -265,10 +278,18 @@ func stop_recording():
 #	print(saved_input)
 
 func discard_recording():
+	$ClearingMemory.play()
 	stop_recording()
 	set_record_time(0)
 	set_play_time(0)
 	saved_input = []
+	
+func say_OnMyOwn():
+	saidByeBye = false
+	yield(get_tree().create_timer(0.2), "timeout")
+	if playing:
+		$OnMyOwn.play()
+		saidByeBye = true
 
 #func compute_state():
 #	state = {
@@ -295,17 +316,20 @@ func checkpoint_entered(cp):
 	
 func use_token_activation():
 	token_checkpoint = true
-	yield(get_tree().create_timer(2.0), "timeout")
+	yield(get_tree().create_timer(4.0), "timeout")
 	token_checkpoint = false
 	
 func activate_checkpoint():
 	if token_checkpoint:
 		return
 	use_token_activation()
+	$DontLeaveMe.play()
+	yield($DontLeaveMe,"finished")
 	print(last_checkpoint)
 #	$PlayerSprite.duplicate()
 	var newPlayerSprite = $PlayerSprite.duplicate()
 	newPlayerSprite.get_node("Particles2D").emitting = true
+	newPlayerSprite.z_index = -10
 	newPlayerSprite.position = $PlayerSprite.global_position
 #	if $PlayerSprite.flip_h:
 #		newPlayerSprite
@@ -314,6 +338,7 @@ func activate_checkpoint():
 	
 #	$CollisionShape2D.disabled = true
 	position = waiting_pos
+	$NiceToMeetYou.play()
 	var new_pos = yield(last_checkpoint.furnish(), "completed")
 	print(new_pos)
 	velo = Vector2(0,0)

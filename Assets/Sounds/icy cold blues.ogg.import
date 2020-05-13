@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/icy cold blues.ogg-6313604cf747e6271e7f3d4673756a40.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/icy cold blues.ogg"
+dest_files=[ "res://.import/icy cold blues.ogg-6313604cf747e6271e7f3d4673756a40.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -37,13 +37,15 @@ tracks/1/keys = {
 [node name="Checkpoint" type="Node2D" groups=[
 "checkpoint_listener",
 ]]
-position = Vector2( 280, -104 )
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Position2D" type="Position2D" parent="."]
 
 [node name="CheckpointArea" type="Area2D" parent="."]
-position = Vector2( -168, 96 )
+position = Vector2( -16, 176 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -52,7 +54,6 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Sprites" type="StaticBody2D" parent="."]
-position = Vector2( 316.892, -119.838 )
 collision_layer = 3
 
 [node name="PlayerSprite" parent="Sprites" instance=ExtResource( 1 )]
@@ -65,106 +66,92 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 94.8628, 161.359, 17.5193, 44.3823 )
 
-[node name="InactiveSprites" type="Sprite" parent="Sprites"]
-position = Vector2( 11.1077, -2.38496 )
+[node name="InactiveSprites2" type="Sprite" parent="Sprites"]
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 16, 48, 48 )
 
-[node name="InactiveComputer" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( -1.0204, -0.794983 )
-scale = Vector2( 1, 1 )
-texture = ExtResource( 2 )
-region_enabled = true
-region_rect = Rect2( 160, 167, 16, 17 )
+[node name="InactiveSprites" type="Node2D" parent="Sprites"]
+visible = false
+scale = Vector2( 3, 3 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( -16, -32.0541 )
-scale = Vector2( 1, 1 )
+position = Vector2( -16, -32 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 32, 96, 16, 16 )
 
 [node name="Sprite2" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( 0, -32.0541 )
-scale = Vector2( 1, 1 )
+position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 32, 96, 16, 16 )
 
 [node name="Sprite3" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( 16, -32.0541 )
-scale = Vector2( 1, 1 )
+position = Vector2( 16, -32 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 32, 96, 16, 16 )
 
 [node name="Sprite4" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( 32, -16.0541 )
-scale = Vector2( 1, 1 )
+position = Vector2( 32, -16 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 96, 16, 16 )
 
 [node name="Sprite5" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( 32, 0 )
-scale = Vector2( 1, 1 )
+position = Vector2( 32, -5.96046e-08 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 96, 16, 16 )
 
 [node name="Sprite6" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( 32, 15.9459 )
-scale = Vector2( 1, 1 )
+position = Vector2( 32, 16 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 96, 16, 16 )
 
 [node name="Sprite7" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( -32, -16.0541 )
-scale = Vector2( 1, 1 )
+position = Vector2( -32, -16 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 80, 96, 16, 16 )
 
 [node name="Sprite8" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( -32, -0.0540771 )
-scale = Vector2( 1, 1 )
+position = Vector2( -32, -5.96046e-08 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 80, 96, 16, 16 )
 
 [node name="Sprite9" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( -32, 15.9459 )
-scale = Vector2( 1, 1 )
+position = Vector2( -32, 16 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 80, 96, 16, 16 )
 
 [node name="Sprite10" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( -32, -32.0541 )
-scale = Vector2( 1, 1 )
+position = Vector2( -32, -32 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 144, 96, 16, 16 )
 
 [node name="Sprite11" type="Sprite" parent="Sprites/InactiveSprites"]
-position = Vector2( 32, -32.0541 )
-scale = Vector2( 1, 1 )
+position = Vector2( 32, -32 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 144, 96, 16, 16 )
 
-[node name="ActiveSprites" type="Sprite" parent="Sprites"]
-visible = false
-scale = Vector2( 3, 3 )
+[node name="InactiveComputer" type="Sprite" parent="Sprites/InactiveSprites"]
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 0, 16, 48, 48 )
+region_rect = Rect2( 160, 167, 16, 17 )
+
+[node name="ActiveSprites" type="Node2D" parent="Sprites"]
+scale = Vector2( 3, 3 )
 
 [node name="ActiveComputer" type="Sprite" parent="Sprites/ActiveSprites"]
-scale = Vector2( 1, 1 )
+position = Vector2( -3.8147e-06, 0 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 176, 167, 16, 17 )
@@ -173,10 +160,10 @@ region_rect = Rect2( 176, 167, 16, 17 )
 position = Vector2( -16, -32 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 65, 96, 15, 16 )
+region_rect = Rect2( 64, 96, 16, 16 )
 
 [node name="Sprite2" type="Sprite" parent="Sprites/ActiveSprites"]
-position = Vector2( -1.90735e-06, -32 )
+position = Vector2( -1.13687e-13, -32 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 64, 96, 16, 16 )
@@ -191,10 +178,10 @@ region_rect = Rect2( 64, 96, 16, 16 )
 position = Vector2( 32, -16 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 97, 112, 15, 16 )
+region_rect = Rect2( 96, 112, 16, 16 )
 
 [node name="Sprite5" type="Sprite" parent="Sprites/ActiveSprites"]
-position = Vector2( 32, -5.68434e-14 )
+position = Vector2( 32, -1.20371e-35 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 96, 112, 16, 16 )
@@ -203,7 +190,7 @@ region_rect = Rect2( 96, 112, 16, 16 )
 position = Vector2( 32, 16 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 97, 112, 15, 16 )
+region_rect = Rect2( 96, 112, 16, 16 )
 
 [node name="Sprite7" type="Sprite" parent="Sprites/ActiveSprites"]
 position = Vector2( -32, -16 )
@@ -212,7 +199,7 @@ region_enabled = true
 region_rect = Rect2( 80, 112, 16, 16 )
 
 [node name="Sprite8" type="Sprite" parent="Sprites/ActiveSprites"]
-position = Vector2( -32, -5.68434e-14 )
+position = Vector2( -32, -3.38813e-21 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 80, 112, 16, 16 )
@@ -240,5 +227,11 @@ anims/furnish = SubResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprites"]
 visible = false
-polygon = PoolVector2Array( -116.892, -120.162, -116.892, 71.8378, 123.108, 71.8378, 123.108, -120.162, -116.892, -120.162, -108.892, -88.1622, 83.1077, -88.1622, 83.1077, 47.8378, -92.8923, 47.8378, -92.8923, -88.1622, -108.892, -80.1622 )
+polygon = PoolVector2Array( -108.892, -120.162, -108.892, 71.8378, 131.108, 71.8378, 131.108, -120.162, -100.892, -120.162, -92.8923, -96.1622, 83.1077, -88.1622, 83.1077, 47.8378, -92.8923, 47.8378, -92.8923, -72.1622 )
+
+[node name="ActivateAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="FurnishAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="."]
 [connection signal="body_entered" from="CheckpointArea" to="." method="_on_CheckpointArea_body_entered"]
