@@ -8,9 +8,13 @@ export var gravity = 20
 export var less_gravity = 10
 export var jump_force = 400
 
+var PlayerSprite = preload("res://PlayerSprite.tscn")
+
 var capacity = 8
 var velo = Vector2()
 var drag = 0.5
+
+var token_checkpoint = false
 
 const jump_buffer = 0.08
 var time_pressed_jump = 0.0
@@ -54,6 +58,8 @@ var null_input = {
 	"is_action_pressed(jump)": false
 }
 
+var last_checkpoint = null
+
 #var state = {
 #	"is_action_pressed(move_right)": false,
 #	"is_action_pressed(move_left)": false,
@@ -71,7 +77,7 @@ func _draw():
 #	draw_circle($PositionAntenna.position, 1.0, Color(1,0,0))
 
 func _ready():
-	$Sprite/AnimationPlayer.play("idle")
+	$PlayerSprite/AnimationPlayer.play("idle")
 	pass
 #	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
@@ -79,10 +85,14 @@ func _process(delta):
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
 	
-	if Input.is_action_pressed("restart"):
-		get_tree().reload_current_scene()
+
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("restart"):
+		if not last_checkpoint:
+			get_tree().reload_current_scene()
+		if last_checkpoint:
+			activate_checkpoint()
 
 	var input = {
 		"is_action_pressed(move_left)": Input.is_action_pressed("move_left"),
@@ -168,7 +178,7 @@ func handle_input(input):
 #			print("moveing left")
 			move_vec.x -= 1
 		if input["is_action_pressed(move_right)"]:
-			print("moveing right", randi())
+#			print("moveing right", randi())
 			move_vec.x += 1
 	
 	velo += move_vec * move_speed - drag * Vector2(velo.x, 0)
@@ -198,9 +208,9 @@ func handle_input(input):
 	if cur_grounded and velo.y > 10:
 		velo.y = 10
 	if velo.x<0:
-		$Sprite.flip_h =true
+		$PlayerSprite.flip_h =true
 	elif velo.x>0:
-		$Sprite.flip_h =false
+		$PlayerSprite.flip_h =false
 
 	velo = move_and_slide(velo, Vector2.UP)
 	
@@ -220,8 +230,8 @@ func get_cur_time():
 
 func found_by_emitter():
 	count_emitter += 1
+	$PlayerSprite/Particles2D.emitting=false
 	if playing:
-		$Sprite/Particles2D.emitting=false
 		stop_playing()
 	if not connected:
 		connected = true
@@ -230,7 +240,7 @@ func lost_by_emitter():
 	count_emitter -= 1
 	if(count_emitter == 0):
 		connected = false
-		$Sprite/Particles2D.emitting=true
+		$PlayerSprite/Particles2D.emitting=true
 		start_playing()
 	
 func start_playing():
@@ -279,3 +289,33 @@ func set_play_time(pt):
 	emit_signal("play_time_changed", time_since_playing)
 #	get_parent().get_node("UI/RecordTime").text=str(time_since_playing)
 	
+func checkpoint_entered(cp):
+	last_checkpoint = cp
+	
+	
+func use_token_activation():
+	token_checkpoint = true
+	yield(get_tree().create_timer(2.0), "timeout")
+	token_checkpoint = false
+	
+func activate_checkpoint():
+	if token_checkpoint:
+		return
+	use_token_activation()
+	print(last_checkpoint)
+#	$PlayerSprite.duplicate()
+	var newPlayerSprite = $PlayerSprite.duplicate()
+	newPlayerSprite.get_node("Particles2D").emitting = true
+	newPlayerSprite.position = $PlayerSprite.global_position
+#	if $PlayerSprite.flip_h:
+#		newPlayerSprite
+	$"../".add_child(newPlayerSprite)
+	var waiting_pos = last_checkpoint.get_node("Sprites").global_position
+	
+#	$CollisionShape2D.disabled = true
+	position = waiting_pos
+	var new_pos = yield(last_checkpoint.furnish(), "completed")
+	print(new_pos)
+	velo = Vector2(0,0)
+	position = new_pos - $PlayerSprite.position
+	last_checkpoint.unfurnish()

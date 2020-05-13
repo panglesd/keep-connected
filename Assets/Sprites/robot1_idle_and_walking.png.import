@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/robot.png-8c8449a2915772750b8c71c8c82cea03.stex"
+path="res://.import/robot1_idle_and_walking.png-503572ba72dda986596af628ee97271c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/robot.png"
-dest_files=[ "res://.import/robot.png-8c8449a2915772750b8c71c8c82cea03.stex" ]
+source_file="res://Assets/Sprites/robot1_idle_and_walking.png"
+dest_files=[ "res://.import/robot1_idle_and_walking.png-503572ba72dda986596af628ee97271c.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
