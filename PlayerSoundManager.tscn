@@ -1,0 +1,119 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/Sounds/goodToSeeYou.wav" type="AudioStream" id=1]
+[ext_resource path="res://Assets/Sounds/recording.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Sounds/dontLeaveMe.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sounds/niceMeetYou.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Sounds/memories.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Sounds/icy cold blues.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Sounds/OutOfInstruction.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Sounds/onMyOwn.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/diskFull.wav" type="AudioStream" id=9]
+[ext_resource path="res://PlayerSoundManager.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Sounds/feelAlreadyAlone.wav" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Sounds/feelAlone.wav" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Sounds/whatsup.wav" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Sounds/hello.wav" type="AudioStream" id=14]
+[ext_resource path="res://Assets/Sounds/Story/introControl.wav" type="AudioStream" id=15]
+
+[node name="PlayerSoundManager" type="Node"]
+script = ExtResource( 10 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = true
+
+[node name="DiskFull" type="Node" parent="."]
+
+[node name="DiskFull" type="AudioStreamPlayer" parent="DiskFull"]
+stream = ExtResource( 9 )
+bus = "Chat"
+
+[node name="RecoverSignal" type="Node" parent="."]
+
+[node name="GoodToSeeYou" type="AudioStreamPlayer" parent="RecoverSignal"]
+stream = ExtResource( 1 )
+bus = "Chat"
+
+[node name="Whatsup" type="AudioStreamPlayer" parent="RecoverSignal"]
+stream = ExtResource( 13 )
+bus = "Chat"
+
+[node name="Restart" type="Node" parent="."]
+
+[node name="DontLeaveMe" type="AudioStreamPlayer" parent="Restart"]
+stream = ExtResource( 3 )
+bus = "Chat"
+
+[node name="feelAlone" type="AudioStreamPlayer" parent="Restart"]
+stream = ExtResource( 12 )
+bus = "Chat"
+
+[node name="feelAlreadyAlone" type="AudioStreamPlayer" parent="Restart"]
+stream = ExtResource( 11 )
+bus = "Chat"
+
+[node name="DiscardMemory" type="Node" parent="."]
+
+[node name="DiscardMemory" type="AudioStreamPlayer" parent="DiscardMemory"]
+stream = ExtResource( 5 )
+bus = "Chat"
+
+[node name="Start" type="Node" parent="."]
+
+[node name="Hello" type="AudioStreamPlayer" parent="Start"]
+stream = ExtResource( 14 )
+bus = "Chat"
+
+[node name="NiceMeetYou" type="AudioStreamPlayer" parent="Start"]
+stream = ExtResource( 4 )
+bus = "Chat"
+
+[node name="Playing" type="Node" parent="."]
+
+[node name="OnMyOwn" type="AudioStreamPlayer" parent="Playing"]
+stream = ExtResource( 8 )
+bus = "Chat"
+
+[node name="GameOver" type="Node" parent="."]
+
+[node name="OutOfInstruction" type="AudioStreamPlayer" parent="GameOver"]
+stream = ExtResource( 7 )
+bus = "Chat"
+
+[node name="Recording" type="Node" parent="."]
+
+[node name="Recording" type="AudioStreamPlayer" parent="Recording"]
+stream = ExtResource( 2 )
+bus = "Chat"
+
+[node name="Story" type="Node" parent="."]
+
+[node name="Intro" type="AudioStreamPlayer" parent="Story"]
+stream = ExtResource( 15 )
+bus = "Story"
+
+[node name="Intro2" type="AudioStreamPlayer" parent="Story"]
+stream = ExtResource( 15 )
+bus = "Story"
+
+[node name="Intro3" type="AudioStreamPlayer" parent="Story"]
+stream = ExtResource( 15 )
+bus = "Story"
+
+[node name="Intro4" type="AudioStreamPlayer" parent="Story"]
+stream = ExtResource( 15 )
+bus = "Story"
+
+[node name="Intro5" type="AudioStreamPlayer" parent="Story"]
+stream = ExtResource( 15 )
+bus = "Story"
+
+[node name="Intro6" type="AudioStreamPlayer" parent="Story"]
+stream = ExtResource( 15 )
+bus = "Story"
+
+[node name="Intro7" type="AudioStreamPlayer" parent="Story"]
+stream = ExtResource( 15 )
+bus = "Story"

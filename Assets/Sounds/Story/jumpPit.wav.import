@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/jumpPit.wav-70b77a9df2d42d4045c94a364238df08.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Story/jumpPit.wav"
+dest_files=[ "res://.import/jumpPit.wav-70b77a9df2d42d4045c94a364238df08.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

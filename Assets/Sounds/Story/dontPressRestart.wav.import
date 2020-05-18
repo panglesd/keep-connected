@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/dontPressRestart.wav-3a1330c7f9baba993159add124b136cd.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Story/dontPressRestart.wav"
+dest_files=[ "res://.import/dontPressRestart.wav-3a1330c7f9baba993159add124b136cd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://UI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/RAM (Random Access Memory).png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/bg_bar.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sprites/fill_bg.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Fonts/robot.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 150
+font_data = ExtResource( 5 )
 
 [node name="UI" type="Control"]
 anchor_right = 1.0
@@ -14,15 +19,18 @@ __meta__ = {
 }
 
 [node name="RAM (Random Access Memory)" type="Sprite" parent="."]
-position = Vector2( 1440, 56 )
+position = Vector2( 992, 72 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="RecordProgress" type="TextureProgress" parent="."]
-margin_left = 1000.0
-margin_top = 26.0
-margin_right = 1396.0
-margin_bottom = 79.0
+modulate = Color( 0.698039, 0.698039, 0.698039, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -198.0
+margin_top = 40.0
+margin_right = 198.0
+margin_bottom = 93.0
 max_value = 8.0
 step = 0.1
 texture_under = ExtResource( 3 )
@@ -62,3 +70,20 @@ margin_left = 1256.0
 margin_top = 168.0
 margin_right = 1296.0
 margin_bottom = 182.0
+
+[node name="RForRestart" type="Label" parent="."]
+visible = false
+margin_left = 96.0
+margin_top = 808.0
+margin_right = 1345.0
+margin_bottom = 967.0
+custom_fonts/font = SubResource( 1 )
+text = "Press r to restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
