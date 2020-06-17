@@ -9,7 +9,7 @@ resource_name = "laser"
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Emitter/Laser:frame")
+tracks/0/path = NodePath("Laser:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -43,7 +43,6 @@ texture = ExtResource( 3 )
 centered = false
 offset = Vector2( -8, 0 )
 hframes = 3
-frame = 2
 region_enabled = true
 region_rect = Rect2( 0, 0, 47, 100 )
 

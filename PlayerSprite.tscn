@@ -92,7 +92,6 @@ shape = SubResource( 4 )
 position = Vector2( 8.4, 9.2 )
 texture = ExtResource( 1 )
 hframes = 13
-frame = 1
 
 [node name="Sprite2" type="Sprite" parent="."]
 visible = false

@@ -257,8 +257,8 @@ func found_by_emitter():
 			AudioServer.set_bus_mute(1, false)
 #			AudioServer.set_bus_mute(2, false)
 			emit_signal("recover_signal")
-			if(saidByeBye and not $OnMyOwn.playing):
-				$PlayerSoundManager.good_to_see_you()
+#			if(saidByeBye and not $OnMyOwn.playing):
+			$PlayerSoundManager.good_to_see_you()
 #				$GoodToSeeYou.play()
 		connected = true
 		emit_signal("activated_checkpoint")

@@ -1,17 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://PlayerSprite.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Sounds/OutOfInstruction.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Sounds/icy cold blues.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Assets/Sounds/jump.wav" type="AudioStream" id=5]
-[ext_resource path="res://Assets/Sounds/memories.wav" type="AudioStream" id=6]
-[ext_resource path="res://Assets/Sounds/niceMeetYou.wav" type="AudioStream" id=7]
-[ext_resource path="res://Assets/Sounds/recording.wav" type="AudioStream" id=8]
-[ext_resource path="res://Assets/Sounds/dontLeaveMe.wav" type="AudioStream" id=9]
-[ext_resource path="res://Assets/Sounds/goodToSeeYou.wav" type="AudioStream" id=10]
-[ext_resource path="res://Assets/Sounds/onMyOwn.wav" type="AudioStream" id=11]
-[ext_resource path="res://Assets/Sounds/diskFull.wav" type="AudioStream" id=12]
 [ext_resource path="res://PlayerSoundManager.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -42,48 +33,12 @@ texture = SubResource( 2 )
 position = Vector2( -9.33333, -16.3333 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
-[node name="jumpSound" type="AudioStreamPlayer" parent="."]
+[node name="jumpSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = -9.244
 bus = "Jump"
-
-[node name="RecordSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-volume_db = -10.785
-
-[node name="EndOfInstructions" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -0.001
-
-[node name="DontLeaveMe" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )
-volume_db = -0.001
-
-[node name="NiceToMeetYou" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -0.001
-
-[node name="ClearingMemory" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -0.001
-
-[node name="DiskFull" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
-volume_db = -0.001
-
-[node name="OnMyOwn" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 11 )
-volume_db = -0.001
-
-[node name="GoodToSeeYou" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-volume_db = -0.001
 
 [node name="PlayerSoundManager" parent="." instance=ExtResource( 13 )]
